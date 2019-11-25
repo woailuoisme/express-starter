@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const moment = require('moment');
 
-const {Model}Schema = new mongoose.Schema(
+const BlogSchema = new mongoose.Schema(
 	{},
 	{
 		timestamps: true,
@@ -14,21 +14,21 @@ const {Model}Schema = new mongoose.Schema(
 				// delete ret.__v;
 				ret.updatedAt = moment(ret.updatedAt).format('YYYY-MM-DD HH:mm:ss');
 				ret.createdAt = moment(ret.createdAt).format('YYYY-MM-DD HH:mm:ss');
-			}
-		}
-	}
+			},
+		},
+	},
 );
 
-{Model}Schema.plugin(uniqueValidator, { message: "'{VALUE}' of '{PATH}' to be unique." });
+BlogSchema.plugin(uniqueValidator, { message: "'{VALUE}' of '{PATH}' to be unique." });
 
 const updateDate = function(next) {
 	next();
 };
-{Model}Schema.pre('save', updateDate)
+BlogSchema.pre('save', updateDate)
 	.pre('update', updateDate)
 	.pre('updateMany', updateDate)
 	.pre('findOneAndUpdate', updateDate)
 	.pre('findByIdAndUpdate', updateDate);
 
-const {Model} = mongoose.models.{Model} || mongoose.model('{Model}', {Model}Schema);
-module.exports = {Model}
+const Blog = mongoose.models.Blog || mongoose.model('Blog', BlogSchema);
+module.exports = Blog;

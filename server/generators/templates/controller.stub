@@ -1,5 +1,5 @@
-const ErrorResponse = require('../utils/ErrorResponse');
-const asyncHandler = require('../middleware/async');
+const ErrorResponse = require('../common/error.response');
+const asyncHandler = require('../middleware/async.handler');
 const {modelCapitalize} = require('../models/{modelCapitalize}');
 /**
  * @desc   Get all {model}
