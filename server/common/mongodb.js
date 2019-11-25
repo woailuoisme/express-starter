@@ -7,7 +7,7 @@ const connectDB = async () => {
 		useFindAndModify: false,
 		useUnifiedTopology: true,
 	});
-	logger.info(`Mongodb connect on ${conn.connection.host}`.cyan.underline.bold);
+	logger.info(`Mongodb connect on ${conn.connection.host}`.green.bold);
 
 	conn.connection.on('error', err => {
 		logger.error(err);

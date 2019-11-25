@@ -9,7 +9,7 @@ const routers = app => {
 	app.use('/api/v1/courses', course);
 	app.use('/api/v1/users', user);
 	app.use('/api/v1/auth', auth);
-	app.use('/file', file);
+	app.use('/api/v1/file', file);
 };
 
 module.exports = routers;

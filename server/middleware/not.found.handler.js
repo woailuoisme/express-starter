@@ -25,7 +25,8 @@ const notFoundHandler = function(req, res, next) {
 	// })
 	// respond with html page
 	if (req.accepts('html')) {
-		res.render('404', { url: req.url });
+		// res.render('404', { url: req.url });
+		res.send({ message: `${req.url} not found` });
 		return;
 	}
 	// respond with json

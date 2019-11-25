@@ -2,6 +2,7 @@ const ErrorResponse = require('../common/error.response');
 const asynHandler = require('../middleware/async.handler');
 const Bootcamp = require('../models/Bootcamp');
 const path = require('path');
+const { uploadsPath } = require('../common/util');
 /**
  * @desc  get all bootcamp
  * @route /api/v1/bootcamps
@@ -96,12 +97,13 @@ const photoUpload = asynHandler(async (req, res, next) => {
 	if (file.size > maxFileUpload)
 		return next(new ErrorResponse(`Please upload an image less than ${maxFileUpload}`, 400));
 	file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
-	file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+	file.mv(path.join(uploadsPath, `/${file.name}`), async err => {
 		if (err) {
 			console.error(err);
 			return next(new ErrorResponse(`Problem with file upload`, 500));
 		}
-		await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
+		await bootcamp.save();
+		// await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
 		res.status(200).json({ success: true, data: file.name });
 	});
 });

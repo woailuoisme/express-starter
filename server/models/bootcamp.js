@@ -124,17 +124,6 @@ BootcampSchema.virtual('courses', {
 	justOne: false,
 });
 
-const updateDate = async function(next) {
-	this.set({ slug: slugify(this.get('name'), { lower: true }) });
-	next();
-};
-
-// update date for bellow 4 methods
-BootcampSchema.pre('updateOne', updateDate)
-	.pre('update', updateDate)
-	.pre('updateMany', updateDate)
-	.pre('findOneAndUpdate', updateDate);
-
 const Bootcamp = mongoose.models.Bootcamp || mongoose.model('Bootcamp', BootcampSchema);
 
 module.exports = Bootcamp;

@@ -1,4 +1,4 @@
-const fileupload = require('express-fileupload');
+// const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 
 const morgan = require('morgan');
@@ -15,7 +15,7 @@ const middleware = app => {
 		// app.use(expressPino);
 	}
 	app.use(cookieParser());
-	app.use(fileupload());
+	// app.use(fileupload());
 };
 
 module.exports = middleware;

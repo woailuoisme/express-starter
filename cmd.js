@@ -35,9 +35,6 @@ if (operate !== 'make') {
 	process.exit(1);
 }
 
-if (cmd.controller || cmd.c || cmd.model || cmd.m) {
-}
-
 if (model && type) {
 	generate(model, type);
 } else {

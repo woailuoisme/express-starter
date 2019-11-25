@@ -1,6 +1,6 @@
 const pino = require('pino');
 const moment = require('moment-timezone');
-//pin timestamp json sting `,"time":1493426328206`;
+// pin timestamp json sting `,"time":1493426328206`;
 const now = moment()
 	.tz('Asia/Shanghai')
 	.format('YYYY-MM-DD HH:mm:ss.SSS ZZ');
