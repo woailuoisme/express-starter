@@ -14,6 +14,7 @@ const notFoundHandler = function(req, res, next) {
 	// res.format({
 	//     html: function () {
 	//         res.render('404', {url: req.url})
+	// res.json({msg: `${req.url} not found`})
 	//     },
 	//     json: function () {
 	//         res.json({msg: `${req.url} not found`})

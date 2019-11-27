@@ -1,6 +1,6 @@
 const ErrorResponse = require('../common/error.response');
 const asyncHandler = require('../middleware/async.handler');
-const Blog = require('../models/Blog');
+const Blog = require('../models/blog');
 /**
  * @desc   Get all blog
  * @route  GET /api/v1/blogs
@@ -40,7 +40,7 @@ const update = asyncHandler(async (req, res, next) => {
 	const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
-		context: 'query', //mongoose-unique-validator docs
+		context: 'query', // mongoose-unique-validator docs
 	});
 	if (!blog) return next(new ErrorResponse(`Blog not found with id of ${req.params.id}`, 404));
 	res.status(200).json({ success: true, data: blog });

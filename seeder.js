@@ -7,10 +7,10 @@ const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
 
 // Load models
-const Bootcamp = require('./src/models/Bootcamp');
-const Course = require('./src/models/Course');
-const User = require('./src/models/User');
-const Review = require('./src/models/Review');
+const Bootcamp = require('./server/models/bootcamp');
+const Course = require('./server/models/course');
+const User = require('./server/models/user');
+const Review = require('./server/models/review');
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, {
@@ -59,3 +59,8 @@ if (process.argv[2] === '-i') {
 } else if (process.argv[2] === '-d') {
 	deleteData();
 }
+
+module.exports = {
+	importData,
+	deleteData,
+};

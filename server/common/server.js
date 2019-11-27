@@ -1,14 +1,12 @@
 const http = require('http');
 const os = require('os');
 const express = require('express');
-const dotenv = require('dotenv');
 // eslint-disable-next-line no-unused-vars
 const colors = require('colors');
 const errorHandler = require('../middleware/error.handler');
 const notFound = require('../middleware/not.found.handler');
 const log = require('./logger');
-const path = require('path');
-const { publicPath, uploadsPath, seederPath } = require('../common/util');
+const { publicPath, uploadsPath } = require('../common/util');
 
 // connected db
 // conndb();
@@ -17,11 +15,10 @@ const app = express();
 
 class ExpressServer {
 	constructor() {
-		const root = path.normalize(`${__dirname}/../..`);
-		app.set('appPath', `${root}client`);
-		app.use(express.static(`${root}/public`));
 		// app.use(express.static(publicPath));
 		//	body parser url query use qs lib
+		app.use(express.static(publicPath));
+		app.use(express.static(uploadsPath));
 		app.use(express.json());
 		app.use(express.urlencoded({ extended: true }));
 		// this.middleware();
@@ -46,7 +43,10 @@ class ExpressServer {
 
 	listen(port = process.env.PORT) {
 		const welcome = p => () =>
-			log.info(`up and running in ${process.env.NODE_ENV || 'development'} @: ${os.hostname()} on port: ${p}}`);
+			log.info(
+				`up and running in ${process.env.NODE_ENV ||
+					'development'} @: ${os.hostname()} on port: ${p}}`,
+			);
 		http.createServer(app).listen(port, welcome(port));
 		return app;
 	}

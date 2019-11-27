@@ -1,6 +1,6 @@
 const ErrorResponse = require('../common/error.response');
 const asyncHandler = require('../middleware/async.handler');
-const {modelCapitalize} = require('../models/{modelCapitalize}');
+const {modelCapitalize} = require('../models/{modelLowercase}');
 /**
  * @desc   Get all {model}
  * @route  GET /api/v1/{modelPluralize}

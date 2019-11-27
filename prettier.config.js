@@ -1,6 +1,6 @@
 module.exports = {
 	$schema: 'http://json.schemastore.org/prettierr',
-	printWidth: 120,
+	printWidth: 100,
 	useTabs: true,
 	tabWidth: 4,
 	semi: true, // 使用分号, 默认true

@@ -1,45 +1,48 @@
 const yargs = require('yargs');
+// eslint-disable-next-line no-unused-vars
+const colors = require('colors');
 const generate = require('./server/generators/generate');
-
-const cmd = yargs
-	.command('make', 'generate templates,example:model,controller,router and etc', {
-		controller: {
-			description: 'generate controller template',
-			alias: 'c',
-			type: 'boolean',
+const serve = yargs
+	.command(
+		'$0',
+		'the default command',
+		() => {},
+		argv => {
+			console.log('this command will be run by default');
 		},
-		router: {
-			description: 'generate router template',
-			alias: 'r',
-			type: 'boolean',
+	)
+	.command(
+		'make [type] [modelName]',
+		'crud generator generate template type,example:model,controller,etc...',
+		yargs => {
+			yargs.positional('type', {
+				describe: 'choose a type ',
+				choices: ['model', 'controller', 'router', 'all'],
+			});
+			yargs.positional('modelName', {
+				describe: 'name fo model ',
+				type: 'string',
+			});
+			yargs.usage('Usage: $0 [type] [modelName]');
+			yargs.example('$0 make model blog', 'generate a blog.js model file');
+			yargs.demandOption(['type', 'modelName']);
+			yargs.alias('h', 'help');
 		},
-	})
-	.option('model', {
-		alias: 'm',
-		description: 'generate model template',
+		args => {
+			if (args.type && args.modelName) {
+				generate(args.modelName, args.type);
+			} else {
+				console.log('please input correct string... '.red.bold);
+			}
+		},
+	)
+	.command('get <username|email> [password]', 'fetch a user by username or email.')
+	.option('verbose', {
+		alias: 'v',
 		type: 'boolean',
-	})
-	.option('type', {
-		alias: 't',
-		describe: 'choose a type ',
-		choices: ['model', 'controller', 'router', 'all'],
+		description: 'Run with verbose logging',
 	})
 	.help()
-	.alias('help', 'h').argv;
-const operate = cmd._[0];
-const model = cmd._[1];
-const type = cmd.type || cmd.t;
+	.wrap(140).argv;
 
-if (operate !== 'make') {
-	console.log('please input correct params: make '.red.bold);
-	process.exit(1);
-}
-
-if (model && type) {
-	generate(model, type);
-} else {
-	console.log('please input correct string... '.red.bold);
-	console.log('example: node cmd  make blog --type=controller or node cmd  make blog -t=controller '.red.bold);
-}
-
-if (cmd._[1]) console.log(cmd);
+console.log(serve);

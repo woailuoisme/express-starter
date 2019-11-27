@@ -75,7 +75,26 @@ UserSchema.methods.getSignedJwtToken = function() {
 
 // Match user entered password to hashed password in database
 UserSchema.methods.matchPassword = async function(enteredPassword) {
+	// eslint-disable-next-line no-return-await
 	return await bcrypt.compare(enteredPassword, this.password);
 };
 
-module.exports = User = mongoose.models.User || mongoose.model('User', UserSchema);
+// Generate and hash password token
+UserSchema.methods.getResetPasswordToken = function() {
+	// Generate token
+	const resetToken = crypto.randomBytes(20).toString('hex');
+
+	// Hash token and set to resetPasswordToken field
+	this.resetPasswordToken = crypto
+		.createHash('sha256')
+		.update(resetToken)
+		.digest('hex');
+
+	// Set expire
+	this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+	return resetToken;
+};
+
+const User = mongoose.models.User || mongoose.model('User', UserSchema);
+
+module.exports = User;
