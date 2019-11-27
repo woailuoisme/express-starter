@@ -5,18 +5,13 @@ const express = require('express');
 const colors = require('colors');
 const errorHandler = require('../middleware/error.handler');
 const notFound = require('../middleware/not.found.handler');
-const log = require('./logger');
+const logger = require('./logger');
 const { publicPath, uploadsPath } = require('../common/util');
-
-// connected db
-// conndb();
 
 const app = express();
 
 class ExpressServer {
 	constructor() {
-		// app.use(express.static(publicPath));
-		//	body parser url query use qs lib
 		app.use(express.static(publicPath));
 		app.use(express.static(uploadsPath));
 		app.use(express.json());
@@ -33,9 +28,10 @@ class ExpressServer {
 		routes(app);
 		app.use(notFound);
 		app.use(errorHandler);
+		// TODO: debug all routers   ????
 		app._router.stack.forEach(function(r) {
 			if (r.route && r.route.path) {
-				console.log(r.route.path);
+				logger.info(r.route.path);
 			}
 		});
 		return this;
@@ -43,7 +39,7 @@ class ExpressServer {
 
 	listen(port = process.env.PORT) {
 		const welcome = p => () =>
-			log.info(
+			logger.info(
 				`up and running in ${process.env.NODE_ENV ||
 					'development'} @: ${os.hostname()} on port: ${p}}`,
 			);

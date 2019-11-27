@@ -1,7 +1,7 @@
 const yargs = require('yargs');
 // eslint-disable-next-line no-unused-vars
 const colors = require('colors');
-const generate = require('./server/generators/generate');
+const generate = require('./server/common/generators/generate');
 const serve = yargs
 	.command(
 		'$0',

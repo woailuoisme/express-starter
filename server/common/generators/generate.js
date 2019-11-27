@@ -5,6 +5,7 @@ const _ = require('lodash');
 const pluralize = require('pluralize');
 // eslint-disable-next-line no-unused-vars
 const colors = require('colors');
+const { modelPath, controllerPath, routerPath } = require('../config');
 
 const make = (modelName = '', type = '') => {
 	if (!modelName && modelName === '') {
@@ -26,9 +27,9 @@ const make = (modelName = '', type = '') => {
 	const inputControllerPath = path.join(__dirname, './templates/controller.stub');
 	const inputRouterPath = path.join(__dirname, './templates/router.stub');
 
-	const outputModePath = path.join(__dirname, `../models/${modelLowercase}.js`);
-	const outputControllerPath = path.join(__dirname, `../controllers/${modelLowercase}.controller.js`);
-	const outputRouterPath = path.join(__dirname, `../routers/${modelLowercase}.router.js`);
+	const outputModePath = path.join(modelPath, `/${modelLowercase}.js`);
+	const outputControllerPath = path.join(controllerPath, `/${modelLowercase}.controller.js`);
+	const outputRouterPath = path.join(routerPath, `/${modelLowercase}.router.js`);
 
 	// read model template and replace
 	const modelTemplate = fs.readFileSync(inputModePath, 'utf8');

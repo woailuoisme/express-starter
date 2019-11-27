@@ -7,9 +7,9 @@
     "start": "cross-env NODE_ENV=production node server/index.js",
     "dev": "nodemon server/index.js --config .nodemonrc.json | pino-pretty -c",
     "dev:debug": "nodemon server/index.js --config .nodemonrc.json --inspect | pino-pretty -c ",
-    "p": "prettier --write 'src/**/*.js'",
-    "p:w": "onchange 'src/**/*.js' -- prettier --write {{changed}}",
-    "lint": "eslint src --color",
+    "p": "prettier --write 'server/**/*.js'",
+    "p:w": "onchange 'server/**/*.js' -- prettier --write {{changed}}",
+    "lint": "eslint server --color",
     "test": "jest --config ./jest-config.js"
   },
   "author": "",
@@ -58,12 +58,20 @@
     "eslint-plugin-standard": "^4.0.1",
     "express-validator": "^6.3.0",
     "faker": "^4.1.0",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "onchange": "^6.1.0",
     "pino-pretty": "^3.4.0",
     "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
     "supertest": "^4.0.2",
     "yargs": "^15.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "pretty-quick --staged"
+    }
   }
 }
