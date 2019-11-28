@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { show, index, create, update, destroy, photoUpload } = require('../controllers/bootcamp.controller');
+const {
+	show,
+	index,
+	create,
+	update,
+	destroy,
+	photoUpload,
+} = require('../controllers/bootcamp.controller');
 const advancedResults = require('../middleware/adv.results.handler');
 const { protect, authorize } = require('../middleware/auth.handler');
 const BootcmapRouter = require('../models/Bootcamp');

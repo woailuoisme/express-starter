@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema, model } = require('mongoose');
+const { Schema } = require('mongoose');
 const moment = require('moment');
 
 const ReviewSchema = new Schema(

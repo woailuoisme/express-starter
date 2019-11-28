@@ -24,12 +24,12 @@ const devMiddleware = app => {
 		// app.use(expressPino);
 	}
 	app.use(cookieParser());
-	app.use(expressValidator);
+	// app.use(expressValidator());
 	app.use(fileupload());
 };
 
 const prodMiddleware = app => {
-	app.use(expressValidator);
+	// app.use(expressValidator());
 	app.use(cookieParser());
 	// File uploading
 	app.use(fileupload());

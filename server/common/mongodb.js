@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const logger = require('./logger');
+const { MONGO_URI, NODE_ENV } = require('./config');
 const connectDB = async () => {
-	const conn = await mongoose.connect(process.env.MONGO_URI, {
+	const conn = await mongoose.connect(MONGO_URI, {
 		useNewUrlParser: true,
 		useCreateIndex: true,
 		useFindAndModify: false,
@@ -13,9 +14,14 @@ const connectDB = async () => {
 		logger.error(err);
 	});
 
-	if (process.env.NODE_ENV === 'development')
+	if (NODE_ENV === 'development')
 		mongoose.set('debug', (collectionName, method, query, doc, options) => {
-			logger.info(`${collectionName}.${method} ${JSON.stringify(query)} ${JSON.stringify(options || {})}`, doc);
+			logger.info(
+				`${collectionName}.${method} ${JSON.stringify(query)} ${JSON.stringify(
+					options || {},
+				)}`,
+				doc,
+			);
 		});
 };
 

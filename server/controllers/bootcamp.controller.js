@@ -2,7 +2,7 @@ const ErrorResponse = require('../common/error.response');
 const asynHandler = require('../middleware/async.handler');
 const Bootcamp = require('../models/Bootcamp');
 const path = require('path');
-const { uploadsPath } = require('../common/util');
+const { uploadsPath } = require('../common/config');
 /**
  * @desc  get all bootcamp
  * @route /api/v1/bootcamps
@@ -87,11 +87,13 @@ const destroy = asynHandler(async (req, res, next) => {
  */
 const photoUpload = asynHandler(async (req, res, next) => {
 	const bootcamp = await Bootcamp.findById(req.params.id);
-	if (!bootcamp) return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+	if (!bootcamp)
+		return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
 	if (!req.files) return next(new ErrorResponse(`Please upload a file`, 400));
 	const file = req.files.file;
 	// Make sure the image is a photo
-	if (!file.mimetype.startsWith('image')) return next(new ErrorResponse(`Please upload an image file`, 400));
+	if (!file.mimetype.startsWith('image'))
+		return next(new ErrorResponse(`Please upload an image file`, 400));
 	// Check filesize
 	const maxFileUpload = process.env.MAX_FILE_UPLOAD;
 	if (file.size > maxFileUpload)

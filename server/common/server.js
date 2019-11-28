@@ -6,7 +6,7 @@ const colors = require('colors');
 const errorHandler = require('../middleware/error.handler');
 const notFound = require('../middleware/not.found.handler');
 const logger = require('./logger');
-const { publicPath, uploadsPath } = require('../common/util');
+const { publicPath, uploadsPath, NODE_ENV, PORT } = require('../common/config');
 
 const app = express();
 
@@ -37,12 +37,9 @@ class ExpressServer {
 		return this;
 	}
 
-	listen(port = process.env.PORT) {
+	listen(port = PORT) {
 		const welcome = p => () =>
-			logger.info(
-				`up and running in ${process.env.NODE_ENV ||
-					'development'} @: ${os.hostname()} on port: ${p}}`,
-			);
+			logger.info(`up and running in ${NODE_ENV} @: ${os.hostname()} on port: ${p}}`);
 		http.createServer(app).listen(port, welcome(port));
 		return app;
 	}
