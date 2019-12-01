@@ -9,5 +9,12 @@ yarn-error.log
 
 tmp
 public
+uploads
+
+coverage
+
 
 .github
+
+
+

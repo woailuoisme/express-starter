@@ -5,7 +5,7 @@ const fs = require('fs');
 const fse = require('fs-extra');
 // const { upload } = require('../middleware/uploads_handler');
 const asyncHandler = require('../middleware/async.handler');
-const { uploadsImagePath } = require('../common/util');
+const { uploadsImagePath } = require('../common/config');
 
 // mkdirp.sync(uploadPath)
 router.post(

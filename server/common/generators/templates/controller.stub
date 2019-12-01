@@ -2,7 +2,7 @@ const ErrorResponse = require('../common/error.response');
 const asyncHandler = require('../middleware/async.handler');
 const {modelCapitalize} = require('../models/{modelLowercase}');
 /**
- * @desc   Get all {model}
+ * @desc   Get all {modelPluralize}
  * @route  GET /api/v1/{modelPluralize}
  * @access Public
  */
@@ -11,54 +11,54 @@ const index = asyncHandler(async (req, res, next) => {
 	res.status(200).json({success: true,count: {modelPluralize}.length,data: {modelPluralize}});
 });
 /**
- * @desc   Create single {modelPluralize}
+ * @desc   Create new {modelLowercase}
  * @route  POST /api/v1/{modelPluralize}
  * @access Public
  */
 const create = asyncHandler(async (req, res, next) => {
-	const {model} = await {modelCapitalize}.create(req.body);
-	res.status(201).json({success: true,data: {model}});
+	const {modelLowercase} = await {modelCapitalize}.create(req.body);
+	res.status(201).json({success: true,data: {modelLowercase}});
 });
 
 /**
- * @desc   Get single {model}
+ * @desc   Get single {modelLowercase}
  * @route  GET /api/v1/{modelPluralize}/:id
  * @access Public
  */
 const show = asyncHandler(async (req, res, next) => {
-	const {model} = await {modelCapitalize}.findById(req.params.id);
-	if (!{model}) return next(new ErrorResponse(`{modelCapitalize} not found with id of ${req.params.id}`, 404));
-	res.status(200).json({success: true,data: {model}});
+	const {modelLowercase} = await {modelCapitalize}.findById(req.params.id);
+	if (!{modelLowercase}) return next(new ErrorResponse(`{modelCapitalize} not found with id of ${req.params.id}`, 404));
+	res.status(200).json({success: true,data: {modelLowercase}});
 });
 
 /**
- * @desc   Update single {model}
+ * @desc   Update single {modelLowercase}
  * @route  PUT /api/v1/{modelPluralize}/:id
  * @access private
  */
 const update = asyncHandler(async (req, res, next) => {
-	const {model} = await {modelCapitalize}.findByIdAndUpdate(req.params.id, req.body, {
+	const {modelLowercase} = await {modelCapitalize}.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
 		context: 'query' //mongoose-unique-validator docs
 	});
-	if (!{model}) return next(new ErrorResponse(`{modelCapitalize} not found with id of ${req.params.id}`, 404));
-	res.status(200).json({ success: true, data: {model} });
+	if (!{modelLowercase}) return next(new ErrorResponse(`{modelCapitalize} not found with id of ${req.params.id}`, 404));
+	res.status(200).json({ success: true, data: {modelLowercase} });
 });
 
 /**
- * @desc   Delete single {model}
+ * @desc   Delete single {modelLowercase}
  * @route  Delete /api/v1/{modelPluralize}/:id
  * @access Private
  */
 const destroy = asyncHandler(async (req, res, next) => {
-	const {model} = await {modelCapitalize}.findByIdAndDelete(req.params.id);
-	if (!{model}) return next(new ErrorResponse(`{modelCapitalize} not found with id of ${req.params.id}`, 404));
+	const {modelLowercase} = await {modelCapitalize}.findByIdAndDelete(req.params.id);
+	if (!{modelLowercase}) return next(new ErrorResponse(`{modelCapitalize} not found with id of ${req.params.id}`, 404));
 
 	res.status(200).json({
 		success: true,
-		data: {model},
-		msg: `delete single {model} ${req.params.id}`
+		data: {modelLowercase},
+		msg: `delete single {modelLowercase} ${req.params.id}`
 	});
 });
 

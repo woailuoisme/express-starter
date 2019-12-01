@@ -1,6 +1,6 @@
 const path = require('path');
-const env = require('dotenv');
-env.config({ path: path.join(__dirname, '../../.env') });
+// const env = require('dotenv');
+// env.config({ path: path.join(__dirname, '../../.env') });
 const rootPath = path.join(__dirname, './../..');
 const serverPath = path.join(__dirname, './..');
 const commonPath = path.join(serverPath, './common');

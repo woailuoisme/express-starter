@@ -16,8 +16,8 @@ const BootcmapRouter = require('../models/Bootcamp');
 router
 	.route('/')
 	// .get(index)
-	.get(protect, advancedResults(BootcmapRouter), index)
-	.post(create);
+	.get(advancedResults(BootcmapRouter), index)
+	.post(protect, authorize(['admin', 'publisher']), create);
 router
 	.route('/:id')
 	.get(show)

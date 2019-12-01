@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { show, index, create, update, destroy } = require('../controllers/{modelLowercase}.controller');
+const { show, index, create, update, destroy } = require('../controllers/post.controller');
 
 router
 	.route('/')

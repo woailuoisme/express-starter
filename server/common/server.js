@@ -7,6 +7,7 @@ const errorHandler = require('../middleware/error.handler');
 const notFound = require('../middleware/not.found.handler');
 const logger = require('./logger');
 const { publicPath, uploadsPath, NODE_ENV, PORT } = require('../common/config');
+const conndb = require('./mongodb');
 
 const app = express();
 
@@ -17,6 +18,7 @@ class ExpressServer {
 		app.use(express.json());
 		app.use(express.urlencoded({ extended: true }));
 		// this.middleware();
+		conndb();
 	}
 
 	middleware(handlers) {

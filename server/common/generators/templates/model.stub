@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const moment = require('moment');
 
-const {Model}Schema = new mongoose.Schema(
+const {modelCapitalize}Schema = new mongoose.Schema(
 	{},
 	{
 		timestamps: true,
@@ -19,16 +19,16 @@ const {Model}Schema = new mongoose.Schema(
 	}
 );
 
-{Model}Schema.plugin(uniqueValidator, { message: "'{VALUE}' of '{PATH}' to be unique." });
+{modelCapitalize}Schema.plugin(uniqueValidator, { message: "'{VALUE}' of '{PATH}' to be unique." });
 
 const updateDate = function(next) {
 	next();
 };
-{Model}Schema.pre('save', updateDate)
+{modelCapitalize}Schema.pre('save', updateDate)
 	.pre('update', updateDate)
 	.pre('updateMany', updateDate)
 	.pre('findOneAndUpdate', updateDate)
 	.pre('findByIdAndUpdate', updateDate);
 
-const {Model} = mongoose.models.{Model} || mongoose.model('{Model}', {Model}Schema);
-module.exports = {Model}
+const {modelCapitalize} = mongoose.models.{modelCapitalize} || mongoose.model('{modelCapitalize}', {modelCapitalize}Schema);
+module.exports = {modelCapitalize}
