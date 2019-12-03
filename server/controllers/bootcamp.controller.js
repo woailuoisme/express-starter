@@ -55,7 +55,7 @@ const update = asynHandler(async (req, res, next) => {
 	const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
-		context: 'query', //mongoose-unique-validator docs
+		context: 'query', // mongoose-unique-validator docs
 	});
 	if (!bootcamp) {
 		return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));

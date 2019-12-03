@@ -27,7 +27,8 @@ const create = asyncHandler(async (req, res, next) => {
  */
 const show = asyncHandler(async (req, res, next) => {
 	const course = await Course.findById(req.params.id);
-	if (!course) return next(new ErrorResponse(`Course not found with id of ${req.params.id}`, 404));
+	if (!course)
+		return next(new ErrorResponse(`Course not found with id of ${req.params.id}`, 404));
 	res.status(200).json({ success: true, data: course });
 });
 
@@ -43,7 +44,8 @@ const update = asyncHandler(async (req, res, next) => {
 		runValidators: true,
 		context: 'query', // mongoose-unique-validator docs
 	});
-	if (!course) return next(new ErrorResponse(`Course not found with id of ${req.params.id}`, 404));
+	if (!course)
+		return next(new ErrorResponse(`Course not found with id of ${req.params.id}`, 404));
 	res.status(200).json({ success: true, data: course });
 });
 
@@ -54,7 +56,8 @@ const update = asyncHandler(async (req, res, next) => {
  */
 const destroy = asyncHandler(async (req, res, next) => {
 	const course = await Course.findByIdAndDelete(req.params.id);
-	if (!course) return next(new ErrorResponse(`Course not found with id of ${req.params.id}`, 404));
+	if (!course)
+		return next(new ErrorResponse(`Course not found with id of ${req.params.id}`, 404));
 
 	res.status(200).json({
 		success: true,

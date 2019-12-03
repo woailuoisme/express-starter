@@ -52,7 +52,7 @@ const update = asynHandler(async (req, res, next) => {
 	const user = await User.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 		runValidators: true,
-		context: 'query', //mongoose-unique-validator docs
+		context: 'query', // mongoose-unique-validator docs
 	});
 	if (!user) {
 		return next(new ErrorResponse(`User not found with id of ${req.params.id}`, 404));

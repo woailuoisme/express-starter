@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const _ = require('lodash');
 const pluralize = require('pluralize');
@@ -25,13 +25,13 @@ const make = (modelName = '', type = '') => {
 	const outputRouterPath = path.join(routerPath, `/${modelLowercase}.router.js`);
 
 	// read model template and replace
-	const modelTemplate = fs.readFileSync(inputModePath, 'utf8');
+	const modelTemplate = fse.readFileSync(inputModePath, 'utf8');
 	const modelContent = modelTemplate.replace(/{modelCapitalize}/g, modelCapitalize);
 	// read router template and replace
-	const routerTemplate = fs.readFileSync(inputRouterPath, 'utf8');
+	const routerTemplate = fse.readFileSync(inputRouterPath, 'utf8');
 	const routerContent = routerTemplate.replace(/{modelLowercase}/g, modelLowercase);
 	// read controller template adn replace
-	const controllerTemplate = fs.readFileSync(inputControllerPath, 'utf8');
+	const controllerTemplate = fse.readFileSync(inputControllerPath, 'utf8');
 	const controllerContent = controllerTemplate
 		.replace(/{modelLowercase}/g, modelLowercase)
 		.replace(/{modelPluralize}/g, modelPluralize)

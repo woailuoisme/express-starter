@@ -56,7 +56,14 @@ const BootcampSchema = new Schema(
 			// Array of strings
 			type: [String],
 			required: true,
-			enum: ['Web Development', 'Mobile Development', 'UI/UX', 'Data Science', 'Business', 'Other'],
+			enum: [
+				'Web Development',
+				'Mobile Development',
+				'UI/UX',
+				'Data Science',
+				'Business',
+				'Other',
+			],
 		},
 		housing: {
 			type: Boolean,

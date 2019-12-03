@@ -15,6 +15,16 @@ const createFile = async (content, path, overwrite = false) => {
 	}
 };
 
+const remove = async path => {
+	const exists = await fse.pathExists(path);
+	if (!exists) {
+		await fse.remove(path);
+		console.log(`The ${path} has been created!`.green.inverse.bold);
+	} else {
+		console.error(`error!!! ${path} has already been existed!`.red.inverse.bold);
+	}
+};
+
 module.exports = {
 	createFile,
 };

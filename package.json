@@ -4,12 +4,13 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "env-cmd -f ./env/prod.env node server/index.js",
+    "start": "env-cmd -f ./env/.env node server/index.js",
     "dev": "env-cmd -f ./env/dev.env nodemon server/index.js --config .nodemonrc.json | pino-pretty -c",
     "dev:debug": "env-cmd -f ./env/dev.env nodemon server/index.js --config .nodemonrc.json --inspect | pino-pretty -c ",
-    "p": "prettier --write 'server/**/*.js'",
+    "p": " prettier --write {server,test}/**/*.js ",
     "p:w": "onchange 'server/**/*.js' -- prettier --write {{changed}}",
-    "lint": "eslint server --color",
+    "lint": "eslint -c .eslintrc.json {server,test}/**",
+    "lint:fix": "eslint --fix -c .eslintrc.json {server,test}/**",
     "test": "env-cmd -f ./env/test.env jest --config=jest.config.js --watch | pino-pretty -c"
   },
   "author": "",
