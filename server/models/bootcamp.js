@@ -130,6 +130,9 @@ BootcampSchema.virtual('courses', {
 	foreignField: 'bootcamp',
 	justOne: false,
 });
+BootcampSchema.method.re = async function() {
+	return { name: this.name, photo: this.photo };
+};
 
 const Bootcamp = mongoose.models.Bootcamp || mongoose.model('Bootcamp', BootcampSchema);
 

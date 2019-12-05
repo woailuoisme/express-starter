@@ -29,7 +29,8 @@ describe('Bootcamps Endpoints : /api/v1/bootcamps', () => {
 		test('should get bootcamps list ', async () => {
 			const res = await request(app)
 				.get('/api/v1/bootcamps')
-				.set('Accept', 'application/json');
+				.set('Accept', 'application/json')
+				.send();
 			expect(res.statusCode).toEqual(200);
 			expect(res.body).toHaveProperty('success', true);
 			// expect(res.body).toHaveProperty('post');
@@ -40,7 +41,8 @@ describe('Bootcamps Endpoints : /api/v1/bootcamps', () => {
 		test('should get single bootcamp ', async () => {
 			const res = await request(app)
 				.get('/api/v1/bootcamps/:id')
-				.set('Accept', 'application/json');
+				.set('Accept', 'application/json')
+				.send();
 			expect(res.statusCode).toEqual(200);
 			expect(res.body).toHaveProperty('success', true);
 			expect(res.body.data).not.toBeNull();
@@ -52,7 +54,8 @@ describe('Bootcamps Endpoints : /api/v1/bootcamps', () => {
 			const res = await request(app)
 				.put('/api/v1/bootcamps/:id')
 				.set('Content-Type', 'application/json')
-				.set('Accept', 'application/json');
+				.set('Accept', 'application/json')
+				.send();
 
 			expect(res.statusCode).toEqual(200);
 			expect(res.body).toHaveProperty('success', true);
@@ -62,7 +65,8 @@ describe('Bootcamps Endpoints : /api/v1/bootcamps', () => {
 		test('should delete single post', async () => {
 			const res = await request(app)
 				.delete('/api/v1/bootcamps/:id')
-				.set('Accept', 'application/json');
+				.set('Accept', 'application/json')
+				.send();
 
 			expect(res.statusCode).toEqual(200);
 			expect(res.body).toHaveProperty('success', true);
