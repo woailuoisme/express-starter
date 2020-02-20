@@ -1,4 +1,4 @@
-const ErrorResponse = require('../common/error.response');
+const ErrorResponse = require('../common/app.error');
 const asyncHandler = require('../middleware/async.handler');
 const Course = require('../models/Course');
 /**

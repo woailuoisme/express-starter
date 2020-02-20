@@ -7,14 +7,11 @@ yarn-error.log
 .idea
 .vscode
 
-tmp
+temp
+_data
 public
 uploads
 
 coverage
-
-
 .github
-
-
-
+/images

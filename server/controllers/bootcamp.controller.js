@@ -1,4 +1,4 @@
-const ErrorResponse = require('../common/error.response');
+const AppError = require('../common/app.error');
 const asynHandler = require('../middleware/async.handler');
 const Bootcamp = require('../models/Bootcamp');
 const path = require('path');
@@ -20,7 +20,7 @@ const index = asynHandler(async (req, res, next) => {
  * @route /api/v1/bootcamps
  * @access public
  */
-const create = asynHandler(async (req, res, next) => {
+const store = asynHandler(async (req, res, next) => {
 	// console.log(req.body);
 	const bootcamp = await Bootcamp.create(req.body);
 	console.log(bootcamp);
@@ -38,7 +38,7 @@ const create = asynHandler(async (req, res, next) => {
 const show = asynHandler(async (req, res, next) => {
 	const bootcamp = await Bootcamp.findById(req.params.id);
 	if (!bootcamp) {
-		return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+		return next(new AppError(`Bootcamp not found with id of ${req.params.id}`, 404));
 	}
 	res.status(200).json({
 		success: true,
@@ -58,7 +58,7 @@ const update = asynHandler(async (req, res, next) => {
 		context: 'query', // mongoose-unique-validator docs
 	});
 	if (!bootcamp) {
-		return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+		return next(new AppError(`Bootcamp not found with id of ${req.params.id}`, 404));
 	}
 	res.status(200).json({ success: true, data: bootcamp });
 });
@@ -71,7 +71,7 @@ const update = asynHandler(async (req, res, next) => {
 const destroy = asynHandler(async (req, res, next) => {
 	const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
 	if (!bootcamp) {
-		return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
+		return next(new AppError(`Bootcamp not found with id of ${req.params.id}`, 404));
 	}
 	res.status(200).json({
 		success: true,
@@ -88,21 +88,21 @@ const destroy = asynHandler(async (req, res, next) => {
 const photoUpload = asynHandler(async (req, res, next) => {
 	const bootcamp = await Bootcamp.findById(req.params.id);
 	if (!bootcamp)
-		return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404));
-	if (!req.files) return next(new ErrorResponse(`Please upload a file`, 400));
+		return next(new AppError(`Bootcamp not found with id of ${req.params.id}`, 404));
+	if (!req.files) return next(new AppError(`Please upload a file`, 400));
 	const file = req.files.file;
 	// Make sure the image is a photo
 	if (!file.mimetype.startsWith('image'))
-		return next(new ErrorResponse(`Please upload an image file`, 400));
+		return next(new AppError(`Please upload an image file`, 400));
 	// Check filesize
 	const maxFileUpload = process.env.MAX_FILE_UPLOAD;
 	if (file.size > maxFileUpload)
-		return next(new ErrorResponse(`Please upload an image less than ${maxFileUpload}`, 400));
+		return next(new AppError(`Please upload an image less than ${maxFileUpload}`, 400));
 	file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
 	file.mv(path.join(uploadsPath, `/${file.name}`), async err => {
 		if (err) {
 			console.error(err);
-			return next(new ErrorResponse(`Problem with file upload`, 500));
+			return next(new AppError(`Problem with file upload`, 500));
 		}
 		await bootcamp.save();
 		// await Bootcamp.findByIdAndUpdate(req.params.id, { photo: file.name });
@@ -115,7 +115,7 @@ const BootcampController = {
 	show,
 	update,
 	destroy,
-	create,
+	create: store,
 	photoUpload,
 };
 

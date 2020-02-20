@@ -1,5 +1,5 @@
 module.exports = {
-	$schema: 'http://json.schemastore.org/prettierr',
+	// $schema: 'http://json.schemastore.org/prettierr',
 	printWidth: 100,
 	useTabs: true,
 	tabWidth: 4,

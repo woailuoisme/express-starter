@@ -1,4 +1,4 @@
-const ErrorResponse = require('../common/error.response');
+const ErrorResponse = require('../common/app.error');
 
 const errorHandler = (err, req, res, next) => {
 	let error = { ...err };
@@ -24,6 +24,13 @@ const errorHandler = (err, req, res, next) => {
 	if (err.name === 'ValidationError') {
 		const message = Object.values(err.errors).map(val => val.message);
 		error = new ErrorResponse(message, 422);
+	}
+
+	if (process.env.NODE_ENV === 'devolopment') {
+		res.status(error.statusCode || 500).json({
+			success: false,
+			msg: error.message || 'Server Error',
+		});
 	}
 
 	res.status(error.statusCode || 500).json({

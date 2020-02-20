@@ -3,7 +3,7 @@ const ErrorResponse = require('../common/app.error');
 // const { check, validationResult } = require('express-validator');
 const validator = require('validator');
 
-const loginValidate = asyncHandler((req, res, next) => {
+const loginRequest = asyncHandler((req, res, next) => {
 	const { password, email } = req.body;
 	let errors;
 	if (validator.inEmpty(email)) errors.push({ message: 'email is required' });
@@ -21,4 +21,4 @@ const loginValidate = asyncHandler((req, res, next) => {
 	next();
 });
 
-module.exports = { loginValidate };
+module.exports = { loginRequest };

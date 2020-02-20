@@ -5,10 +5,12 @@
     "prettier/standard"
   ],
   "plugins": [
+    "babel",
     "import",
     "prettier",
     "standard"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
@@ -17,6 +19,9 @@
     "node": true,
     "es6": true,
     "jest": true
+  },
+  "ecmaFeatures": {
+    "classes": true
   },
   "rules": {
     "no-unused-vars": "warn",

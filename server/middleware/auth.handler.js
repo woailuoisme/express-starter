@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('./async.handler');
-const ErrorResponse = require('../common/error.response');
+const ErrorResponse = require('../common/app.error');
 const User = require('../models/user');
 const { JWT_SECRET } = require('../common/config');
 

@@ -1,8 +1,7 @@
-
 class Repository {
 	model;
 
-	constructor({ model }) {
+	constructor(model = null) {
 		this.model = model;
 	}
 
@@ -30,3 +29,5 @@ class Repository {
 		return this.model.findByIdAndDelete(id);
 	}
 }
+
+module.exports = Repository;

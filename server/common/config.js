@@ -1,12 +1,14 @@
 const path = require('path');
-// const env = require('dotenv');
-// env.config({ path: path.join(__dirname, '../../.env') });
+const env = require('dotenv');
+env.config({ path: path.join(__dirname, '../../.env') });
+
 const rootPath = path.join(__dirname, './../..');
 const serverPath = path.join(__dirname, './..');
 const commonPath = path.join(serverPath, './common');
 const controllerPath = path.join(serverPath, './controllers');
 const modelPath = path.join(serverPath, './models');
 const routerPath = path.join(serverPath, './routers');
+const requestPath = path.join(serverPath, './requests');
 const seederPath = path.join(serverPath, './seeders');
 const middlewarePath = path.join(serverPath, './middleware');
 
@@ -45,6 +47,7 @@ module.exports = {
 	serverPath,
 	commonPath,
 	controllerPath,
+	requestPath,
 	modelPath,
 	routerPath,
 	seederPath,
