@@ -1,10 +1,11 @@
+
 const mongoose = require('mongoose');
-const User = require('../../server/models/user');
+const User = require('../../server/databases/mongoose/models/user');
 const userOne = {
-	_id: mongoose.Schema.Types.ObjectId,
-	name: 'woailuo',
-	email: 'jhbwyl@126.com',
-	password: '123456',
+  _id: mongoose.Schema.Types.ObjectId,
+  name: 'woailuo',
+  email: 'jhbwyl@126.com',
+  password: '123456'
 };
 
 const user = User.create(userOne);

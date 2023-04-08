@@ -1,33 +1,31 @@
 class Repository {
-	model;
+  constructor(model = null) {
+    this.model = model;
+  }
 
-	constructor(model = null) {
-		this.model = model;
-	}
+  find(conditions = {}) {
+    return this.model.find(conditions);
+  }
 
-	find(conditions = {}) {
-		return this.model.find(conditions);
-	}
+  create(docs) {
+    return this.model.create(docs);
+  }
 
-	create(docs) {
-		return this.model.create(docs);
-	}
+  findById(id) {
+    return this.model.findById(id);
+  }
 
-	findById(id) {
-		return this.model.findById(id);
-	}
+  findByIdAndUpdate(id, update = {}) {
+    return this.model.findByIdAndUpdate(id, update, {
+      new: true,
+      runValidators: true,
+      context: 'query' // mongoose-unique-validator docs
+    });
+  }
 
-	findByIdAndUpdate(id, update = {}) {
-		return this.model.findByIdAndUpdate(id, update, {
-			new: true,
-			runValidators: true,
-			context: 'query', // mongoose-unique-validator docs
-		});
-	}
-
-	findByIdAndDelete(id) {
-		return this.model.findByIdAndDelete(id);
-	}
+  findByIdAndDelete(id) {
+    return this.model.findByIdAndDelete(id);
+  }
 }
 
 module.exports = Repository;

@@ -1,14 +1,55 @@
-const pino = require('pino');
-const moment = require('moment-timezone');
-const { APP_ID, LOG_LEVEL } = require('./config');
-// pin timestamp json sting `,"time":1493426328206`;
-const now = moment()
-	.tz('Asia/Shanghai')
-	.format('YYYY-MM-DD HH:mm:ss.SSS ZZ');
-const logger = pino({
-	name: APP_ID || 'express',
-	level: LOG_LEVEL || 'debug',
-	timestamp: () => `,"time":"${now}"`,
+const fs = require('fs');
+const winston = require('winston');
+const { format } = winston;
+
+require('winston-daily-rotate-file');
+
+// Use LOG_DIR from env
+const LOG_DIR = process.env.LOG_DIR || 'logs';
+const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+
+// Create log directory if it does not exist
+if (!fs.existsSync(LOG_DIR)) {
+  fs.mkdirSync(LOG_DIR);
+}
+const { getIPAddress } = require('./info');
+
+/**
+ * Create a new winston logger.
+ */
+const logger = winston.createLogger({
+  format: format.combine(
+    format.colorize(),
+    format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss'
+    }),
+    format.printf((info) => `[${info.timestamp}] [${getIPAddress()}] ${info.level}: ${info.message}`)
+  ),
+  transports: [
+    new winston.transports.Console({
+      // format: format.combine(format.colorize(), format.simple(),),
+      level: 'info'
+    }),
+    new winston.transports.DailyRotateFile({
+      format: format.combine(format.timestamp({ format: 'HH-MM:ss YYYY-MM-DD' }), format.json()),
+      maxFiles: '7d',
+      level: LOG_LEVEL,
+      dirname: LOG_DIR,
+      datePattern: 'YYYY-MM-DD',
+      filename: '%DATE%-debug.log'
+    })
+  ]
 });
+
+exports.logStream = {
+  /**
+   * A writable stream for winston logger.
+   *
+   * @param {any} message
+   */
+  write(message) {
+    logger.info(message.toString());
+  }
+};
 
 module.exports = logger;

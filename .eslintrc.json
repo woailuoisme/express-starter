@@ -1,30 +1,15 @@
 {
-  "extends": [
-    "standard",
-    "prettier",
-    "prettier/standard"
-  ],
-  "plugins": [
-    "babel",
-    "import",
-    "prettier",
-    "standard"
-  ],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "sourceType": "module"
-  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
   "env": {
-    "commonjs": true,
-    "node": true,
     "es6": true,
-    "jest": true
+    "node": true
   },
-  "ecmaFeatures": {
-    "classes": true
+  "parserOptions": {
+    "ecmaVersion": 2018
   },
   "rules": {
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "spaced-comment": "warn",
     "space-before-function-paren": 0,
     "new-cap": 0,
