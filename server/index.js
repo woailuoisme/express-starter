@@ -1,4 +1,4 @@
-const Server = require('./common/server');
+
 const routes = require('./routers');
 const { devMiddleware, prodMiddleware } = require('./middleware');
 const logger = require('./common/logger');

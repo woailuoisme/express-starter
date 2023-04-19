@@ -4,10 +4,16 @@ const User = require('../databases/mongoose/models/User');
 const sendEmail = require('../common/email');
 const crypto = require('crypto');
 
+
 /**
- * @desc   Register user
- * @route  Post /api/v1/auth/register
- * @access Public
+ * @apiName GetUser
+ * @apiGroup User
+ * @api {get} /user/:id Request User information
+ *
+ * @apiParam {Number} id Users unique ID.
+ *
+ * @apiSuccess {String} firstname Firstname of the User.
+ * @apiSuccess {String} lastname  Lastname of the User.
  */
 const register = asyncHandler(async (req, res, next) => {
   const { name, password, email, role } = req.body;

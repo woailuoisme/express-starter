@@ -1,6 +1,7 @@
-const fs = require('fs');
-const winston = require('winston');
-const { format } = winston;
+import fs from 'fs';
+import winston, { format } from 'winston';
+
+import 'winston-daily-rotate-file';
 
 require('winston-daily-rotate-file');
 
